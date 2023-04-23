@@ -15,9 +15,15 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('article.article_list') }}">Articles</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
+         {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ url_for('auth.logout') }}">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ url_for('auth.login') }}">Login</a>
+          </li>
+        {% endif %}
       </ul>
     </div>
   </div>
