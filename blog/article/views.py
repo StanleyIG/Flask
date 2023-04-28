@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 from werkzeug.exceptions import NotFound
-
+from flask_login import login_required
 from blog.user.views import get_user_name
 
 article = Blueprint("article", __name__, url_prefix="/article", static_folder="../static")
@@ -30,6 +30,7 @@ ARTICLES = {
 
 
 @article.route("/")
+@login_required
 def article_list():
     return render_template(
         "articles/list.html",

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Flask_prjct"
+name = "flask_prjct"
 version = "0.1.0"
 description = ""
 authors = ["StanleyIG"]
@@ -7,7 +7,10 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-flask = "^2.2.3"
+flask = "2.2.2"
+python-dotenv = "^1.0.0"
+flask_login = "0.6.2"
+flask_sqlalchemy = "3.0.2"
 
 [tool.poetry.dev-dependencies]
 
