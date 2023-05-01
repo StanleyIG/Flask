@@ -46,7 +46,7 @@ def get_article(pk: int):
         raise NotFound("Article id:{}, not found".format(pk))
     title = article_raw["title"]
     text = article_raw["text"]
-    author = get_user_name(article_raw["author"])
+    author = get_user_name(article_raw["author"]).email
     return render_template(
         "articles/details.html",
         title=title,
