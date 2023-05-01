@@ -44,6 +44,35 @@ version = "0.4.6"
 
 [[package]]
 category = "main"
+description = "DNS toolkit"
+name = "dnspython"
+optional = false
+python-versions = ">=3.7,<4.0"
+version = "2.3.0"
+
+[package.extras]
+curio = ["curio (>=1.2,<2.0)", "sniffio (>=1.1,<2.0)"]
+dnssec = ["cryptography (>=2.6,<40.0)"]
+doh = ["h2 (>=4.1.0)", "httpx (>=0.21.1)", "requests (>=2.23.0,<3.0.0)", "requests-toolbelt (>=0.9.1,<0.11.0)"]
+doq = ["aioquic (>=0.9.20)"]
+idna = ["idna (>=2.1,<4.0)"]
+trio = ["trio (>=0.14,<0.23)"]
+wmi = ["wmi (>=1.5.1,<2.0.0)"]
+
+[[package]]
+category = "main"
+description = "A robust email address syntax and deliverability validation library."
+name = "email-validator"
+optional = false
+python-versions = ">=3.7"
+version = "2.0.0.post2"
+
+[package.dependencies]
+dnspython = ">=2.0.0"
+idna = ">=2.0.0"
+
+[[package]]
+category = "main"
 description = "A simple framework for building complex web applications."
 name = "flask"
 optional = false
@@ -103,6 +132,22 @@ SQLAlchemy = ">=1.4.18"
 
 [[package]]
 category = "main"
+description = "Form rendering, validation, and CSRF protection for Flask with WTForms."
+name = "flask-wtf"
+optional = false
+python-versions = ">=3.7"
+version = "1.1.1"
+
+[package.dependencies]
+Flask = "*"
+WTForms = "*"
+itsdangerous = "*"
+
+[package.extras]
+email = ["email-validator"]
+
+[[package]]
+category = "main"
 description = "Lightweight in-process concurrent programming"
 marker = "platform_machine == \"aarch64\" or platform_machine == \"ppc64le\" or platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"AMD64\" or platform_machine == \"win32\" or platform_machine == \"WIN32\""
 name = "greenlet"
@@ -113,6 +158,14 @@ version = "2.0.2"
 [package.extras]
 docs = ["sphinx", "docutils (<0.18)"]
 test = ["objgraph", "psutil"]
+
+[[package]]
+category = "main"
+description = "Internationalized Domain Names in Applications (IDNA)"
+name = "idna"
+optional = false
+python-versions = ">=3.5"
+version = "3.4"
 
 [[package]]
 category = "main"
@@ -273,6 +326,20 @@ watchdog = ["watchdog"]
 
 [[package]]
 category = "main"
+description = "Form validation and rendering for Python web development."
+name = "wtforms"
+optional = false
+python-versions = ">=3.7"
+version = "3.0.1"
+
+[package.dependencies]
+MarkupSafe = "*"
+
+[package.extras]
+email = ["email-validator"]
+
+[[package]]
+category = "main"
 description = "Backport of pathlib-compatible object wrapper for zip files"
 marker = "python_version < \"3.10\""
 name = "zipp"
@@ -285,18 +352,22 @@ docs = ["sphinx (>=3.5)", "jaraco.packaging (>=9)", "rst.linker (>=1.9)", "furo"
 testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-cov", "pytest-enabler (>=1.3)", "jaraco.itertools", "jaraco.functools", "more-itertools", "big-o", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)", "pytest-flake8"]
 
 [metadata]
-content-hash = "07a4c7b41aae6549705b112421631863d578a78c039402001648b0ac41a15476"
+content-hash = "bf6396a51e9621cc75f71d27db6a53ddb408c1da7b02176d1f5637ec806a6b4e"
 python-versions = "^3.8"
 
 [metadata.files]
 alembic = []
 click = []
 colorama = []
+dnspython = []
+email-validator = []
 flask = []
 flask-login = []
 flask-migrate = []
 flask-sqlalchemy = []
+flask-wtf = []
 greenlet = []
+idna = []
 importlib-metadata = []
 importlib-resources = []
 itsdangerous = []
@@ -308,4 +379,5 @@ python-dotenv = []
 sqlalchemy = []
 typing-extensions = []
 werkzeug = []
+wtforms = []
 zipp = []
