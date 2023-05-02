@@ -11,15 +11,13 @@ auth = Blueprint('auth', __name__, static_folder='../static')
 
 @auth.route('/login', methods=('GET',))
 def login():
-    errors = []
     if current_user.is_authenticated:
         return redirect(url_for('user.profile', pk=current_user.id))
 
     form = LoginForm(request.form)
     return render_template(
         'auth/login.html',
-        form=form,
-        errors=errors
+        form=form
     )
 
 
@@ -39,7 +37,7 @@ def login_post():
         return redirect(url_for('user.profile', pk=user.id))
     else:
         flash('Invalid form data')
-        return redirect(url_for('.login'))
+        return render_template('auth/login.html', form=form)
 
 
 
