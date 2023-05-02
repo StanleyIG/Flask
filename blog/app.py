@@ -4,6 +4,7 @@ from .report.views import report
 from .article.views import article
 from .index.views import index
 from .auth.view import auth
+from .author.views import author
 from .config import DevelopmentConfig, ProductionConfig
 from blog.extension import db, login_manager, migrate, csrf
 from blog.models import User
@@ -15,7 +16,8 @@ VIEWS = [
     user,
     article,
     report,
-    auth
+    auth,
+    author
 ]
 
 

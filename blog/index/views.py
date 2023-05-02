@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from blog.models import User
 
 index = Blueprint("index", __name__, url_prefix="/", static_folder="../static")
 

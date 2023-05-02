@@ -1,14 +1,31 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}
-    Article details
+    {{ article.title }}
 {% endblock %}
+
+{% block head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mini.css">
+{% endblock %}
+
 {% block body %}
-    <h1>
-        {{ title }}
-    </h1>
-    <br>
-    {{ text }}
-    <br>
-    {{ author }}
+    <div class="row">
+        <h1>{{ article.title }}</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-12">{{ article.text }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="text-muted"> Author:
+                <div> Username: {{ article.author.user.username }}</div>
+                <div> firstname: {{ article.author.user.first_name }}</div>
+                <div> lastname: {{ article.author.user.last_name }}</div>
+            </div>
+            <div><small class="text-muted">Created at: {{ article.created_at.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
+            <div><small class="text-muted">Updated at: {{ article.updated_at.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
+        </div>
+    </div>
 {% endblock %}

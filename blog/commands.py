@@ -12,9 +12,14 @@ def create_init_user(username, email, password):
     from wsgi import app
 
     with app.app_context():
-        db.session.add(
-            User(username=username, email=email, password=generate_password_hash(password), is_admin=False)
-        )
+        user = User(username=username,
+                     first_name=None,
+                     last_name=None,
+                     email=email,
+                     password=generate_password_hash(password),
+                     is_admin=False
+                     )
+        db.session.add(user)
         db.session.commit()
 
 @click.command('create_superuser')
@@ -25,7 +30,13 @@ def create_superuser(username, email, password):
     from blog.models import User
     from wsgi import app
     with app.app_context():
-        admin = User(username=username, email=email, password=generate_password_hash(password), is_admin=True)
+        admin = User(username=username,
+                     first_name=None,
+                     last_name=None,
+                     email=email,
+                     password=generate_password_hash(password),
+                     is_admin=True
+                     )
         db.session.add(admin)
         db.session.commit()
 
