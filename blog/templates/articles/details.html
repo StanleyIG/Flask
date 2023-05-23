@@ -4,28 +4,30 @@
     {{ article.title }}
 {% endblock %}
 
-{% block head %}
-    {{ block.super }}
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mini.css">
-{% endblock %}
-
 {% block body %}
-    <div class="row">
-        <h1>{{ article.title }}</h1>
-    </div>
-    <div class="row">
-        <div class="col-md-12">{{ article.text }}</div>
-    </div>
-
-    <div class="row">
-        <div class="col-6">
-            <div class="text-muted"> Author:
-                <div> Username: {{ article.author.user.username }}</div>
-                <div> firstname: {{ article.author.user.first_name }}</div>
-                <div> lastname: {{ article.author.user.last_name }}</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>{{ article.title }}</h1>
             </div>
-            <div><small class="text-muted">Created at: {{ article.created_at.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
-            <div><small class="text-muted">Updated at: {{ article.updated_at.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">{{ article.text }}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div><small class="text-muted">Author: {{ article.author.user.first_name }} {{ article.author.user.last_name }}</small></div>
+                <div><small class="text-muted">Created at: {{ article.created_at.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
+                <div><small class="text-muted">Updated at: {{ article.updated_at.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
+                <div class="col-md-6">
+                {% for tag in article.tags %}
+                    <a href="{{ url_for('article.article_tag_list', tag_id=tag.id) }}"
+                           class="btn btn-primary btn-center">{{ tag.name }}</a>
+                {% endfor %}
+               </div>
+            </div>
+
         </div>
     </div>
 {% endblock %}

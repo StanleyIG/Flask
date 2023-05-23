@@ -51,5 +51,16 @@ def delete_user(user_id):
         db.session.delete(user)
         db.session.commit()
 
+@click.command('create-init-tags')
+def create_init_tags():
+    from blog.models import Tag
+    from wsgi import app
+
+    with app.app_context():
+        tags = ('flask', 'django', 'python', 'poetry', 'sqlite')
+        for item in tags:
+            db.session.add(Tag(name=item))
+        db.session.commit()
+    click.echo(f'Created tags: {", ".join(tags)}')
 
 
