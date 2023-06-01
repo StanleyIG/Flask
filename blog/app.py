@@ -57,3 +57,4 @@ def register_commands(app: Flask):
     app.cli.add_command(commands.create_init_user)
     app.cli.add_command(commands.create_superuser)
     app.cli.add_command(commands.delete_user)
+    app.cli.add_command(commands.create_init_tags)

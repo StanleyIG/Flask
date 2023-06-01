@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from flask_login import login_required, current_user
+from flask_login import current_user
 from werkzeug.exceptions import NotFound
-
+from sqlalchemy.orm import joinedload
 from blog.extension import db
 from blog.forms.article import CreateArticleForm
-from blog.models import Article, Author
+from blog.models import Article, Author, Tag
 from flask_login import login_required
 
 
@@ -24,7 +24,12 @@ def article_list():
 @article.route('/<int:article_id>/', methods=['GET'])
 @login_required
 def article_detail(article_id):
-    _article: Article = Article.query.filter_by(id=article_id).one_or_none()
+    _article: Article = Article.query.filter_by(
+        id=article_id
+    ).options(
+        joinedload(Article.tags)
+    ).one_or_none()
+
     if _article is None:
         raise NotFound
     return render_template(
@@ -33,10 +38,25 @@ def article_detail(article_id):
     )
 
 
+@article.route('tag_list/<int:tag_id>/', methods=['GET'])
+@login_required
+def article_tag_list(tag_id):
+    _tag = Tag.query.filter_by(id=tag_id).one_or_none()
+    if _tag is None:
+        raise NotFound
+    _articles = _tag.articles
+
+    return render_template(
+        'articles/list.html',
+        articles=_articles,
+    )
+
+
 @article.route('/create/', methods=['GET'])
 @login_required
 def create_article_form():
     form = CreateArticleForm(request.form)
+    form.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by('name')]
     return render_template('articles/create.html', form=form)
 
 
@@ -44,8 +64,12 @@ def create_article_form():
 @login_required
 def create_article():
     form = CreateArticleForm(request.form)
+
+    form.tags.choices = [(tag.id, tag.name,) for tag in Tag.query.order_by('name')]
+
     if form.validate_on_submit():
         _article = Article(title=form.title.data.strip(), text=form.text.data)
+
         if current_user.author:
             _article.author_id = current_user.author.id
         else:
@@ -53,6 +77,11 @@ def create_article():
             db.session.add(author)
             db.session.flush()
             _article.author_id = author.id
+
+        if form.tags.data:
+            selected_tags = Tag.query.filter(Tag.id.in_(form.tags.data))
+            for tag in selected_tags:
+                _article.tags.append(tag)
 
         db.session.add(_article)
         db.session.commit()

@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, request
 from werkzeug.exceptions import NotFound
 from flask_login import login_required, current_user, login_user
 from blog.models import User
+from blog.models import Article
 from blog.forms.user import UserRegisterForm
 from werkzeug.security import generate_password_hash
 from blog.extension import db
@@ -63,11 +64,12 @@ def user_list():
 @login_required
 def profile(pk: int):
     _user = User.query.filter_by(id=pk).one_or_none()
+    _article = Article.query.filter_by(author_id=_user.id)
     if _user is None:
         raise NotFound("User id:{}, not found".format(pk))
     return render_template(
         "users/details.html",
-        user=_user
+        user=_user, articles=_article
     )
 
 
