@@ -4,7 +4,7 @@ description = "A database migration tool for SQLAlchemy."
 name = "alembic"
 optional = false
 python-versions = ">=3.7"
-version = "1.10.4"
+version = "1.11.1"
 
 [package.dependencies]
 Mako = "*"
@@ -92,6 +92,22 @@ version = ">=3.6.0"
 [package.extras]
 async = ["asgiref (>=3.2)"]
 dotenv = ["python-dotenv"]
+
+[[package]]
+category = "main"
+description = "Simple and extensible admin interface framework for Flask"
+name = "flask-admin"
+optional = false
+python-versions = "*"
+version = "1.5.8"
+
+[package.dependencies]
+Flask = ">=0.7"
+wtforms = "*"
+
+[package.extras]
+aws = ["boto"]
+azure = ["azure-storage-blob"]
 
 [[package]]
 category = "main"
@@ -273,7 +289,7 @@ description = "Database Abstraction Library"
 name = "sqlalchemy"
 optional = false
 python-versions = ">=3.7"
-version = "2.0.10"
+version = "2.0.15"
 
 [package.dependencies]
 greenlet = "!=0.4.17"
@@ -308,21 +324,21 @@ description = "Backported and Experimental Type Hints for Python 3.7+"
 name = "typing-extensions"
 optional = false
 python-versions = ">=3.7"
-version = "4.5.0"
+version = "4.6.2"
 
 [[package]]
 category = "main"
 description = "The comprehensive WSGI web application library."
 name = "werkzeug"
 optional = false
-python-versions = ">=3.7"
-version = "2.2.3"
+python-versions = ">=3.8"
+version = "2.3.4"
 
 [package.dependencies]
 MarkupSafe = ">=2.1.1"
 
 [package.extras]
-watchdog = ["watchdog"]
+watchdog = ["watchdog (>=2.3)"]
 
 [[package]]
 category = "main"
@@ -352,7 +368,7 @@ docs = ["sphinx (>=3.5)", "jaraco.packaging (>=9)", "rst.linker (>=1.9)", "furo"
 testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-cov", "pytest-enabler (>=1.3)", "jaraco.itertools", "jaraco.functools", "more-itertools", "big-o", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)", "pytest-flake8"]
 
 [metadata]
-content-hash = "bf6396a51e9621cc75f71d27db6a53ddb408c1da7b02176d1f5637ec806a6b4e"
+content-hash = "fa997c7bdc9d74d37429b31784076969925e73a8451d846c5311b09abf8a2de9"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -362,6 +378,7 @@ colorama = []
 dnspython = []
 email-validator = []
 flask = []
+flask-admin = []
 flask-login = []
 flask-migrate = []
 flask-sqlalchemy = []

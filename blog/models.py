@@ -23,6 +23,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
     is_admin = db.Column(db.Boolean, default=False)
+    is_staff = db.Column(db.Boolean, default=False)
 
     author = relationship('Author', uselist=False, back_populates='user')
 
