@@ -27,7 +27,7 @@ class User(db.Model, UserMixin):
 
     author = relationship('Author', uselist=False, back_populates='user')
 
-    def __init__(self, username, first_name, last_name, email, password, is_admin):
+    def __init__(self, username, first_name, last_name, email, password, is_admin, is_staff):
         #self.id = id
         self.username = username
         self.first_name = first_name
@@ -35,6 +35,7 @@ class User(db.Model, UserMixin):
         self.email = email
         self.password = password
         self.is_admin = is_admin
+        self.is_staff = is_staff
 
 
 class Author(db.Model):
