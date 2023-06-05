@@ -35,7 +35,8 @@ def create_superuser(username, email, password):
                      last_name=None,
                      email=email,
                      password=generate_password_hash(password),
-                     is_admin=True
+                     is_admin=True,
+                     is_staff=True,
                      )
         db.session.add(admin)
         db.session.commit()
