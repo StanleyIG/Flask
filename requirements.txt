@@ -10,3 +10,4 @@ WTForms
 Flask-WTF
 email-validator
 Flask-Admin
+gunicorn
