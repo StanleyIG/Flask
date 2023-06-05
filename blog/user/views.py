@@ -36,6 +36,7 @@ def register():
             last_name=form.last_name.data,
             password=generate_password_hash(form.password.data),
             is_admin=False,
+            is_staff=False,
         )
 
         db.session.add(_user)
