@@ -6,14 +6,14 @@ from .index.views import index
 from .auth.view import auth
 from .author.views import author
 from .config import DevelopmentConfig, ProductionConfig
-from blog.extension import db, login_manager, migrate, csrf, _admin, api
+from blog.extension import db, login_manager, migrate, csrf, _admin #, api
 from blog.models import User, Tag, Article
 from blog import commands
 from .admin import views
-from combojsonapi.spec import ApiSpecPlugin
-from combojsonapi.event import EventPlugin
-from combojsonapi.permission import PermissionPlugin
-from blog.api.views import api_blueprint
+#from combojsonapi.spec import ApiSpecPlugin
+#from combojsonapi.event import EventPlugin
+#from combojsonapi.permission import PermissionPlugin
+#from blog.api.views import api_blueprint
 
 
 VIEWS = [
@@ -23,7 +23,7 @@ VIEWS = [
     report,
     auth,
     author,
-    api_blueprint,
+    #api_blueprint,
 ]
 
 
@@ -46,6 +46,7 @@ def register_extensions(app):
     migrate.init_app(app, db, compare_type=True)
     csrf.init_app(app)
     _admin.init_app(app)
+    """
     api.plugins = [
         EventPlugin(),
         PermissionPlugin(),
@@ -60,6 +61,7 @@ def register_extensions(app):
         ),
     ]
     api.init_app(app)
+    """
 
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
